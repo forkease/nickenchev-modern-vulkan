@@ -1,29 +1,11 @@
-cmake_minimum_required(VERSION 3.24)
-project(VulkanLearning)
+cmake_minimum_required(VERSION 4.5)
+project( vulkan-lesson_01 VERSION 0.0.0 LANGUAGES CXX )
 
-find_package(SDL3 REQUIRED)
-find_package(Vulkan REQUIRED COMPONENTS volk shaderc_combined)
-find_package(glm REQUIRED)
+find_package( SDL3 REQUIRED )
+find_package( Vulkan REQUIRED COMPONENTS volk )
+find_library( SHADERC_SHARED_LIB shaderc_shared REQUIRED )
+find_package( glm REQUIRED )
 
-add_executable(vulkanapp
-	"src/main.cpp"
-	"src/application.h"
-	"src/application.cpp"
-	 "src/utils.h"
-	 "src/utils.cpp")
-
-set(CMAKE_CXX_STANDARD 26)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# For MSVC, you often need the 'latest' flag specifically
-if(MSVC)
-    target_compile_options(vulkanapp PRIVATE /std:c++latest)
-endif()
-
-target_link_libraries(vulkanapp PRIVATE
-	Vulkan::Vulkan
-	Vulkan::volk
-	Vulkan::shaderc_combined
-	SDL3::SDL3
-	glm::glm)
-
+set( APP ${PROJECT_NAME}_app )
+set( APP_LIB ${PROJECT_NAME}_lib )
+add_subdirectory( src )
