@@ -4,21 +4,31 @@ module;
 module app.utils;
 import std;
 
+namespace app {
 
-void showError(SDL_Window *window, const std::string &errorMessasge)
-{
-}
+    using Text = std::string;
+    using TextRef = Text const &;
 
-std::string readTextFile(const std::string &filePath)
-{
-	std::ifstream infile(filePath);
-	if (infile.is_open())
-	{
-		std::stringstream buffer;
-		buffer << infile.rdbuf();
-		const std::string output = buffer.str();
-		infile.close();
-		return output;
-	}
-	return std::string();
-}
+    void showError(SDL_Window *window, TextRef errorMessasge) { }
+
+    auto file_read_full( TextRef path ) -> Text {
+        namespace fs = std::filesystem;
+        using Size = std::size_t;
+        static constexpr Text Empty_Text{ };
+        std::ifstream file( path );
+
+        if ( not file.is_open( )) return Empty_Text;
+
+        Size fileSize = fs::file_size( path );
+        Text text;
+        text.resize_and_overwrite( fileSize, [&file]( char *buff, Size size ){
+            file.read( buff, size );
+
+            return file.gcount( );
+        });
+        file.close();
+
+        return text;
+    }
+
+} // namespace `app`

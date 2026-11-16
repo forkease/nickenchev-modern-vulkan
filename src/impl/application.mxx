@@ -12,6 +12,7 @@ module;
 module application;
 
 import app.utils;
+namespace app {
 
 void Application::showError(const std::string &errorMessasge) const
 {
@@ -21,7 +22,7 @@ void Application::showError(const std::string &errorMessasge) const
 bool Application::initialize()
 {
 	SDL_InitSubSystem(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Vulkan Learning", width, height, SDL_WINDOW_VULKAN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("Vulkan Learning", width, height, SDL_WINDOW_VULKAN ); // | SDL_WINDOW_RESIZABLE
 	if (!window)
 	{
 		showError("Error creating window");
@@ -582,7 +583,7 @@ VkShaderModule Application::createShaderModule(const std::string &fileName, shad
 {
 	// read shader file from disk
 	const std::string shaderPath = "src/shaders/" + fileName;
-	const std::string src = readTextFile(shaderPath);
+	const std::string src = file_read_full( shaderPath );
 	if (src.empty())
 	{
 		showError("Specified shader file doesn't exist: " + shaderPath);
@@ -959,7 +960,7 @@ void Application::render()
 		.imageLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
 		.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR, // clear the image
 		.storeOp = VK_ATTACHMENT_STORE_OP_STORE, // keep data for presentation
-		.clearValue{.color{0.01f, 0.01f, 0.01f, 1}}
+		.clearValue{.color{.0144f, .0144f, .0144f, 1.f}}
 	};
 	VkRenderingAttachmentInfo depthAttachInfo
 	{
@@ -1093,3 +1094,4 @@ void Application::render()
 	vkQueuePresentKHR(gfxQueue, &presentInfo);
 }
 
+} // namaspace `app`

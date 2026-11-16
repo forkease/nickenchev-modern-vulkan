@@ -7,17 +7,21 @@ module;
 #include "vk_mem_alloc.h"
 
 export module application;
-import std;
+// app
 import app.utils;
+// std
+import std;
 
+namespace app {
 struct FrameResources
 {
 	VkCommandPool commandPool = nullptr;
 	VkCommandBuffer commandBuffer = nullptr;
 	VkSemaphore imageAcquiredSemaphore = nullptr;
 };
-
-export class Application
+} // namespace `app`
+export namespace app {
+class Application
 {
 	constexpr static uint32_t VulkanVersion{ VK_API_VERSION_1_4 };
 	constexpr static uint32_t MaxFramesInFlight{ 2 };
@@ -90,3 +94,4 @@ public:
 	void shutdown();
 	void run();
 };
+} // namespace `app`
