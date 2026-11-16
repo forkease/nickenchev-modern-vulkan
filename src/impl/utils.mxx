@@ -6,8 +6,6 @@ import std;
 
 namespace app {
 
-    using Text = std::string;
-    using TextRef = Text const &;
 
     void showError(SDL_Window *window, TextRef errorMessasge) { }
 
