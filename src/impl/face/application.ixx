@@ -1,10 +1,6 @@
 module;
-#define VK_NO_PROTOTYPES
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_vulkan.h>
-#include <vulkan/vulkan.h>
-#include <shaderc/shaderc.hpp>
-#include "vk_mem_alloc.h"
+
+#include "headers/app_glue.hxx"
 
 export module application;
 // app

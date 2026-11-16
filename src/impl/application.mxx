@@ -1,13 +1,7 @@
 module;
-#define VK_NO_PROTOTYPES
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_vulkan.h>
-#include <vulkan/vulkan.h>
-#include <shaderc/shaderc.hpp>
-#define VOLK_IMPLEMENTATION
-#include <volk.h>
-#define VMA_IMPLEMENTATION
-#include "face/vk_mem_alloc.h"
+
+#define APP_GLUE_IMPLEMENTATION
+#include "face/headers/app_glue.hxx"
 
 module application;
 
